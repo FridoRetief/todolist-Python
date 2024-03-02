@@ -22,26 +22,35 @@ def display_menu():
 def add_task(menu):
     while menu.lower() != 'exit':
         task = input("Enter the task:")
-        print("Success!")
-        print("________________________________________________________________")
-        menu = input("Type 'exit' to revert to main menu or Enter to add another task:")
         tasks.append(task)
+        print("Success!")
+        print("________")
+        menu = input("Type 'exit' to revert to main menu or press Enter o add another task:")
+        print("_____________________________________________________________________")
+        if menu.lower() == 'exit':
+            print("Exiting!")
 
-def view_tasks(tasks):
-    print("tasks:")
-    for index, task in enumerate(tasks, 1):
-        print(f"{index}. {task}")
-    print("Here are all your tasks.")
-    print("________________________")
+def view_tasks(tasks, menu):
+    while menu.lower() != 'exit':
+        print("tasks:")
+        for index, task in enumerate(tasks, 1):
+            print(f"{index}. {task}")
+        print("Here are all your tasks.")
+        print("________________________")
 
-    item_number = input("Press Enter to go back to main menu or type the number asigned to the task that you want to remove:")
-    print("___________________________________________________________________________________________________")
+        item_number = input("Type the number asigned to the task that you want to remove:")
+        print("____________________________________________________________")
 
-    if item_number.isdigit():
-        item_number = int(item_number)
-        if 1 <= item_number <= len(tasks):
-            del tasks[item_number - 1]
-    print("Success!")
+        if item_number.isdigit():
+            item_number = int(item_number)
+            if 1 <= item_number <= len(tasks):
+                del tasks[item_number - 1]
+        print("Success!")
+        print("________")
+        menu = input("Press enter to remove another item or type 'exit' to revert to main menu:")
+        print("_________________________________________________________________________")
+        if menu.lower() == 'exit':
+            print("Exiting!")
 
 def finished_tasks(menu):
     while menu.lower() != 'exit':
@@ -77,7 +86,10 @@ def finished_tasks(menu):
         print("Here are all youre finished tasks.")
         print("__________________________________")
 
-        menu = input("Type 'exit' to go back to main menu or press enter to mark another task as finished:")
+        menu = input("Type 'exit' to revert to main menu or press enter to mark another task as finished:")
+        print("___________________________________________________________________________________")
+        if menu.lower() == 'exit':
+            print("Exiting!")
 
 while True:
     display_menu()
@@ -87,7 +99,7 @@ while True:
     if choice == '1':
         add_task(menu)
     elif choice == '2':
-        view_tasks(tasks)
+        view_tasks(tasks, menu)
     elif choice == '3':
         finished_tasks(menu)
     elif choice == '4':
